@@ -227,6 +227,7 @@
         genCandidato: [
           { text: 'Masculino', value: 'Masculino' },
           { text: 'Feminino', value: 'Feminino' },
+          { text: 'Prefiro não responder', value: 'Prefiro não responder' },
         ],
         pcds: [],
         search: '',
