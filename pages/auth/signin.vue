@@ -63,13 +63,20 @@
         this.loading = !this.loading
         try {
           await this.$axios.$post('brqv/signin', this.user).then(response => {
-            this.$store.dispatch('login/setLogin', response.data.user)
-            this.$auth.login('local')
-            this.$auth.setUser(response.data.user)
-            localStorage.setItem('brqv_userData', JSON.stringify(response.data.user))
-            localStorage.setItem('brqv_loggin', true)
-            this.$toast.success(`Bem vindo de volta 👋`)
-            this.$router.push('/me/profile')
+
+            if(!response.data.user.candidado_confirm_email){
+              localStorage.setItem('brqv_loggin_email', response.data.user.bpmn_brqv_emailcan)
+              this.$router.push('/auth/confirm-email')
+            } else {
+              this.$store.dispatch('login/setLogin', response.data.user)
+              this.$auth.login('local')
+              this.$auth.setUser(response.data.user)
+              localStorage.setItem('brqv_userData', JSON.stringify(response.data.user))
+              localStorage.setItem('brqv_loggin', true)
+              this.$toast.success(`Bem vindo de volta 👋`)
+              this.$router.push('/me/profile')
+            }
+            
           })
           this.loading = !this.loading
         } catch (e) {
