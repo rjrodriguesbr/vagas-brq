@@ -80,7 +80,7 @@
           })
           this.loading = !this.loading
         } catch (e) {
-          console.log(e)
+          this.$toast.error(`Ops! Não deu pra fazer login. Verifique os dados de email e senha que você digitou.`)
           this.loading = !this.loading
         }
       }
